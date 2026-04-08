@@ -1,0 +1,67 @@
+# Football Analytics — Configuration
+# ===================================
+
+scraping:
+  targets:
+    - name: whoscored_player_stats
+      url: "https://www.whoscored.com/statistics"
+      selectors:
+        table: "#player-table-statistics-body"
+        rows: "tr"
+        columns: "td"
+      pagination:
+        type: click
+        selector: ".next"
+        max_pages: 10
+      rate_limit: 5
+      output_format: csv
+
+    - name: whoscored_team_stats
+      url: "https://www.whoscored.com/statistics"
+      selectors:
+        table: "#team-table-statistics-body"
+        rows: "tr"
+        columns: "td"
+      pagination:
+        type: click
+        selector: ".next"
+        max_pages: 5
+      rate_limit: 5
+      output_format: csv
+
+  browser:
+    headless: true
+    timeout: 30000             # ms to wait for page load
+    user_agents:
+      - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+      - "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15"
+      - "Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0"
+    stealth: true
+
+  retry:
+    max_attempts: 3
+    backoff_base: 2            # exponential backoff: 2^attempt seconds
+
+analysis:
+  min_minutes: 900             # minimum minutes played for per-90 inclusion
+  per90_metrics:
+    - goals
+    - assists
+    - key_passes
+    - tackles
+    - interceptions
+    - aerial_duels_won
+  composite_weights:
+    attacking_threat:
+      goals_per90: 0.35
+      assists_per90: 0.25
+      key_passes_per90: 0.25
+      xg_per90: 0.15
+    defensive_solidity:
+      tackles_per90: 0.30
+      interceptions_per90: 0.30
+      blocks_per90: 0.20
+      aerial_duels_won_per90: 0.20
+  output_format: csv
+  chart_style: "seaborn-v0_8-whitegrid"
+  chart_dpi: 150
