@@ -1,0 +1,26 @@
+# Scraping
+playwright>=1.44
+beautifulsoup4>=4.12
+lxml>=5.2
+
+# Data
+pandas>=2.2
+numpy>=1.26
+
+# Analysis
+scipy>=1.13
+
+# Visualization
+matplotlib>=3.9
+seaborn>=0.13
+plotly>=5.22
+
+# Config
+pyyaml>=6.0
+
+# Utilities
+rich>=13.7
+
+# Testing
+pytest>=8.2
+pytest-asyncio>=0.23
