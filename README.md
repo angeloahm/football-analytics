@@ -17,9 +17,11 @@ football-analytics/
 │   └── analysis/            # Data analysis skill
 │       └── SKILL.md
 ├── subagents/               # Subagent instructions
-│   ├── scraper/             # Scraper subagent
+│   ├── mister/              # Orchestrator (Opus 4.6)
 │   │   └── SUBAGENT.md
-│   └── analyzer/            # Analyzer subagent
+│   ├── volante/             # Scraper (Haiku 4.5)
+│   │   └── SUBAGENT.md
+│   └── meia/                # Analyzer (Sonnet 4.6)
 │       └── SUBAGENT.md
 ├── src/                     # Source code
 │   ├── scraping/            # Scraping modules
